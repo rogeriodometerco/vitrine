@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.ironjacamar.org/schema/datasources_1_0.xsd">
-
+<!--
 	<datasource jndi-name="java:/vitrineDSx" pool-name="vitrineDS">
 		<connection-url>jdbc:postgresql://localhost:5432/vitrine
 		</connection-url>
@@ -18,7 +18,7 @@
 		</validation>
 	</datasource>
 
-<!-- 
+ 
 	<datasource jndi-name="java:/vitrineTesteDS" pool-name="vitrineTesteDS">
 		<connection-url>jdbc:postgresql://localhost:5432/vitrine
 		</connection-url>
@@ -34,7 +34,7 @@
 				class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter"></exception-sorter>
 		</validation>
 	</datasource>
- -->
+ 
 
 	<datasource jta="true" jndi-name="java:/vitrineDS2"
 		pool-name="vitrineDS2" enabled="true" use-ccm="false">
@@ -55,5 +55,5 @@
 			<share-prepared-statements>false</share-prepared-statements>
 		</statement>
 	</datasource>
-
+-->
 </datasources>

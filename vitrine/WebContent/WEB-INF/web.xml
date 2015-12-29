@@ -5,15 +5,12 @@
     <servlet-name>javax.ws.rs.core.Application</servlet-name>
     <url-pattern>/rest/*</url-pattern>
   </servlet-mapping>
-
-	<filter>
-		<filter-name>Filtro metodo</filter-name>
-		<filter-class>filter.ResponseFilter</filter-class>
-	</filter>
-	<filter-mapping>
-	<filter-name>Filtro metodo</filter-name>
-	<url-pattern>/rest/*</url-pattern>
-	</filter-mapping>
-
-
+  <filter>
+    <filter-name>Filtro metodo</filter-name>
+    <filter-class>filter.ResponseFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Filtro metodo</filter-name>
+    <url-pattern>/rest/*</url-pattern>
+   </filter-mapping>
 </web-app>
