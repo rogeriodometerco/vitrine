@@ -1,11 +1,8 @@
 package rest;
 
-import java.util.Map;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -36,8 +33,8 @@ public class UsuarioRest  {
 		return Response.ok()
 				.entity(
 						getFacade().salvar(usuario))
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
+				//.header("Access-Control-Allow-Origin", "*")
+				//.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
 				.build();
 	}
 
@@ -47,8 +44,8 @@ public class UsuarioRest  {
 		return Response.ok()
 				.entity(
 						getFacade().listar())
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
+				//.header("Access-Control-Allow-Origin", "*")
+				//.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
 				.build();
 	}
 
@@ -59,8 +56,8 @@ public class UsuarioRest  {
 		return Response.ok()
 				.entity(
 						getFacade().recuperar(id))
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
+				//.header("Access-Control-Allow-Origin", "*")
+				//.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
 				.build();
 	}
 
@@ -70,11 +67,11 @@ public class UsuarioRest  {
 		getFacade().excluir(
 				getFacade().recuperar(id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
+				//.header("Access-Control-Allow-Origin", "*")
+				//.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
 				.build();
 	}
-
+/*
 	@OPTIONS 
 	public Response options()  throws Exception {
 		return Response.ok()
@@ -85,5 +82,5 @@ public class UsuarioRest  {
 						"Accept-Encoding,Accept-Charset,Keep-Alive,Connection,Referer,Origin,Content-Type")
 				.build();
 	}
-
+*/
 }

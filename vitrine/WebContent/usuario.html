@@ -13,6 +13,7 @@ $(document).ready(function(){
 			
 		  $("#btSalvar").click(function() {
 			  var obj = JSON.stringify({
+					"id": $("#id").val(), 
 					"nome": $("#nome").val(), 
 					"email": $("#email").val(),
 					"senha": $("#senha").val()
