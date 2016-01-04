@@ -30,6 +30,7 @@ public class UsuarioRest  {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response registrar(Usuario usuario) throws Exception {
+		usuario.setRole("ADMIN");
 		return Response.ok()
 				.entity(
 						getFacade().salvar(usuario))

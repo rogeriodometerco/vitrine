@@ -28,6 +28,10 @@ public class Usuario implements Serializable {
 	@Column(name="nome")
 	private String nome;
 	
+	@Column(name="role")
+	private String role;
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -58,6 +62,14 @@ public class Usuario implements Serializable {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 }

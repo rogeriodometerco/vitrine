@@ -1,5 +1,8 @@
 package rest;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -11,11 +14,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
+
+import modelo.Estabelecimento;
 import servico.EstabelecimentoFacade;
 import util.Ejb;
 
-import modelo.Estabelecimento;
-
+@SecurityDomain("vitrineRealm")
+@Stateless
+@RolesAllowed("ADMIN")
 @Path("/estabelecimento")
 public class EstabelecimentoRest {
 
@@ -46,6 +53,7 @@ public class EstabelecimentoRest {
 	 * 
 	 * @returns lista de estabelecimentos.
 	 */
+	@PermitAll
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listar()  throws Exception {
@@ -79,10 +87,12 @@ public class EstabelecimentoRest {
 				.build();
 	}
 
+	/*
 	@OPTIONS 
 	public Response options()  throws Exception {
 		return Response.ok()
 				.build();
-	}	
+	}
+	*/	
 
 }
