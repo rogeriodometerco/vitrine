@@ -48,7 +48,7 @@ public class SessaoRest {
 	public Response usuarioEstaLogado() throws WebApplicationException {
 		return Response.ok()
 				.entity(httpServletRequest.getRemoteUser() != null ? true : false)
-				.build();
+			 	.build();
 	}
 }
 
