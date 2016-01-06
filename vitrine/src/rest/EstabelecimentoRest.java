@@ -20,9 +20,9 @@ import modelo.Estabelecimento;
 import servico.EstabelecimentoFacade;
 import util.Ejb;
 
-//@SecurityDomain("vitrineRealm")
-//@Stateless
-//@RolesAllowed("ADMIN")
+@SecurityDomain("vitrineRealm")
+@Stateless
+@RolesAllowed("ADMIN")
 @Path("/estabelecimento")
 public class EstabelecimentoRest {
 
@@ -53,7 +53,7 @@ public class EstabelecimentoRest {
 	 * 
 	 * @returns lista de estabelecimentos.
 	 */
-	//@PermitAll
+	@PermitAll
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listar()  throws Exception {

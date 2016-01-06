@@ -2,8 +2,6 @@ package servico;
 
 import javax.ejb.Stateless;
 
-import exception.AppPersistenceException;
-
 import modelo.Estabelecimento;
 
 @Stateless
