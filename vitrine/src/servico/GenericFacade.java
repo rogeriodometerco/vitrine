@@ -48,7 +48,7 @@ public abstract class GenericFacade<T> {
 			entidade = this.getEntityManager().merge(entidade);
 			return entidade;
 		} catch (Exception e) {
-			throw new AppPersistenceException("Erro ao recuperar entidade " 
+			throw new AppPersistenceException("Erro ao salvar entidade " 
 					+ classeEntidade.getSimpleName() + ": "
 					+ e.getMessage());
 		}

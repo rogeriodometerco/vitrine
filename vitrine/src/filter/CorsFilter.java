@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -23,10 +24,10 @@ public class CorsFilter implements Filter {
 	    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
 	        HttpServletRequest httpReq = (HttpServletRequest) req;
 	        HttpServletResponse httpResp = (HttpServletResponse) resp;
+	        System.out.println("corfilter.doFilter()");
 	        try {
 	            // No Origin header present means this is not a cross-domain request
 	            String origin = httpReq.getHeader("Origin");
-	            System.out.println("origin: " + origin);
 	            //DfLogger.debug(this.getClass(),"doFilter(): origin " + origin, null, null);
 	            if (origin == null) {
 	                //DfLogger.debug(this.getClass(),"doFilter(): origin == null ", null, null);
