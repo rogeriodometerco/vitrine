@@ -2,6 +2,7 @@ package rest;
 
 import java.util.Map;
 
+import javax.ejb.SessionContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+
+import com.sun.net.httpserver.HttpContext;
 
 @Path("/sessao")
 public class SessaoRest {
