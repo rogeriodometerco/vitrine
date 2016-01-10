@@ -48,7 +48,6 @@ public class EstabelecimentoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response registrar(Estabelecimento estabelecimento) throws Exception {
-		System.out.println(sessionContext.getCallerPrincipal().getName());
 		return Response.ok()
 				.entity(
 						getFacade().salvar(estabelecimento))

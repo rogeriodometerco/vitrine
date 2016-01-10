@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+
+	var baseURI = "/vitrine/rest/sessao" 
+
+	$("#btLogin").click(function() {
+		var obj = JSON.stringify({
+			"email": $("#emailLogin").val(),
+			"senha": $("#senhaLogin").val()
+		});
+
+		var x = $.ajax({
+			type: 'POST',
+			contentType: 'application/json',
+			dataType: "JSON",
+			url: "/vitrine/rest/sessao",
+			data: obj,
+			success: function(data) {
+				console.log(data);
+               $("#retorno").text(x.responseText);
+			},
+			error: function(data) {
+				console.log(data);
+	              $("#retorno").html(x.responseText);
+			}
+		});
+	});
+
+	$("#btLogout").click(function() {
+		var x= $.ajax({
+			type: 'DELETE',
+			url: "/vitrine/rest/sessao",
+	       	success: function(data) {
+				console.log(data);
+				$("#retorno").text(x.responseText);
+			},
+			error: function(data) {
+				console.log(data);
+				$("#retorno").text(x.responseText);
+			}
+		});
+	});
+
+
+	  
+	$("#btEstaLogado").click(function() {
+		var x = $.ajax({
+			type: "GET",
+			url: baseURI,
+			success: function(data){
+				console.log(data);
+				$("#retorno").text(x.responseText);
+			},
+			error: function(data){
+				console.log(data);
+				$("#retorno").html(x.responseText);
+			}
+		});
+	});
+});
+
+	</script>
+</head>
+
+<body>
+	<h2>Autentique-se</h2>
+	<label for="emailLogin">email</label>
+	<br />
+	<input type="text" id="emailLogin" value="rogeriodometerco@gmail.com" />
+	<br />
+	<label for="senhaLogin">Senha</label>
+	<br />
+	<input type="password" id="senhaLogin" value="123456" />
+	<br />
+	<input type="button" id="btLogin" value="Login" />
+	<input type="button" id="btLogout" value="Logout" />
+	<input type="button" id="btEstaLogado" value="Está logado?" />
+	<p>
+	<p>Retorno:</p>
+	<p id="retorno" />
+</body>
+</html>
