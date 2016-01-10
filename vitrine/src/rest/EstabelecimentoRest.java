@@ -30,9 +30,7 @@ import util.Ejb;
 public class EstabelecimentoRest {
 
 	private EstabelecimentoFacade facade;
-	@Context 
-	private SessionContext sessionContext;
-	
+
 	private EstabelecimentoFacade getFacade() {
 		if (facade == null) {
 			facade = Ejb.lookup(EstabelecimentoFacade.class);
@@ -48,7 +46,6 @@ public class EstabelecimentoRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response registrar(Estabelecimento estabelecimento) throws Exception {
-		System.out.println(sessionContext.getCallerPrincipal().getName());
 		return Response.ok()
 				.entity(
 						getFacade().salvar(estabelecimento))

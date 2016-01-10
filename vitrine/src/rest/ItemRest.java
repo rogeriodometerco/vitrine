@@ -1,12 +1,9 @@
 package rest;
 
-import java.util.Date;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-//import javax.enterprise.context.RequestScoped;
-//import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -17,36 +14,23 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
 import modelo.Item;
-
 import servico.ItemFacade;
 import util.Ejb;
 
 @Path("/itens")
-//@RequestScoped
 public class ItemRest {  
 	private Logger logger = Logger.getLogger(
 			getClass().getName());
 
-	//@Inject
-	//ItemFacade facade;
-
 	private ItemFacade facade;
 
-	@PostConstruct
-	public void postConstruct() {
+	private ItemFacade getFacade() {
 		if (facade == null) {
 			facade = Ejb.lookup(ItemFacade.class);
 		}
+		return facade;
 	}
-
-	//private ItemFacade getFacade() {
-	//	if (facade == null) {
-	//		facade = Ejb.lookup(ItemFacade.class);
-	//	}
-	//	return facade;
-	//}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -55,10 +39,8 @@ public class ItemRest {
 		logger.log(Level.INFO, item.toString());
 		Item itemPersistido;
 		try {
-			Date dataSistema = new Date();
-			item.setDataTransacao(dataSistema);
-
-			itemPersistido = facade.salvar(item);
+			itemPersistido = getFacade().salvar(item);
+			logger.log(Level.INFO,"Item persistido: " + itemPersistido.toString());
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
 		}

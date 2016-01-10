@@ -13,19 +13,19 @@
 		$("#btSalvar").click(function() {
 			var obj = JSON.stringify({
 				"id" : $("#id").val(),
-<!--				"estabelecimentoId" : $("#estabelecimentoId").val(), -->
 				"estabelecimento" : {
-					"id" : $("#estabelecimentoId").val()},
-				"codigo" : $("#codigo").val(),
+					"id" : $("#estabelecimentoId").val()
+				},
 				"titulo" : $("#titulo").val(),
-				"usuarioIdCriacao" : $("#usuarioIdCriacao").val(),
+				"codigo" : $("#codigo").val()
+/* 				"usuarioIdCriacao" : $("#usuarioIdCriacao").val(),
 				"dataCriacao" : $("#dataCriacao").val(),
 				"usuarioIdTransacao" : $("#usuarioIdTransacao").val(),
 				"dataTransacao" : $("#dataTransacao").val(),
 				"excluido" : $("#excluido").val(),
 				"descricao" : $("#descricao").val(),
 				"preco" : $("#preco").val()
-			});
+ */			});
 			var x = $.ajax({
 				type : 'POST',
 				contentType : 'application/json',
