@@ -30,9 +30,7 @@ import util.Ejb;
 public class EstabelecimentoRest {
 
 	private EstabelecimentoFacade facade;
-	@Context 
-	private SessionContext sessionContext;
-	
+
 	private EstabelecimentoFacade getFacade() {
 		if (facade == null) {
 			facade = Ejb.lookup(EstabelecimentoFacade.class);

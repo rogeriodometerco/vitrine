@@ -5,7 +5,7 @@
 	http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
 
- <!-- 
+ 
 	<persistence-unit name="vitrinePU" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
@@ -17,8 +17,8 @@
 		</properties>
 	</persistence-unit>
  
--->
-	<persistence-unit name="vitrinePU" transaction-type="JTA">
+
+<!-- 	<persistence-unit name="vitrinePU" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/vitrineDS</jta-data-source>
 
@@ -30,5 +30,5 @@
 				value="org.hibernate.dialect.PostgreSQLDialect" />
 		</properties>
 	</persistence-unit>
-
+ -->
 </persistence>
