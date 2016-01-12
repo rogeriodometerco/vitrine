@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -13,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Item implements Serializable {
+public class UsuarioEstabelecimento implements Serializable {
 
 	private static final long serialVersionUID = 1l;
 
@@ -26,17 +25,9 @@ public class Item implements Serializable {
 	@JoinColumn(name = "estabelecimento_id")
 	private Estabelecimento estabelecimento;
 
-	@Column(name="codigo")
-	private String codigo;
-
-	@Column(name="titulo", nullable=false)
-	private String titulo;
-
-	@Column(name="descricao")
-	private String descricao;
-
-	@Column(name="preco")
-	private BigDecimal preco;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -54,36 +45,12 @@ public class Item implements Serializable {
 		this.estabelecimento = estabelecimento;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public BigDecimal getPreco() {
-		return preco;
-	}
-
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

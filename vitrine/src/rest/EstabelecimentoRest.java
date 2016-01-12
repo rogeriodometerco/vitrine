@@ -1,14 +1,12 @@
 package rest;
 
-import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -17,9 +15,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import modelo.Estabelecimento;
+import modelo.Usuario;
+
 import org.jboss.ejb3.annotation.SecurityDomain;
 
-import modelo.Estabelecimento;
 import servico.EstabelecimentoFacade;
 import util.Ejb;
 
@@ -45,10 +45,13 @@ public class EstabelecimentoRest {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response registrar(Estabelecimento estabelecimento) throws Exception {
+	public Response criar(@Context HttpServletRequest httpServletRequest, 
+			Estabelecimento estabelecimento) throws Exception {
+		Usuario usuario = (Usuario)httpServletRequest.getSession().getAttribute("usuario");
 		return Response.ok()
 				.entity(
-						getFacade().salvar(estabelecimento))
+						getFacade()
+						.criar(usuario, estabelecimento))
 				.build();
 	}
 

@@ -17,14 +17,14 @@
 					"id" : $("#estabelecimentoId").val()
 				},
 				"titulo" : $("#titulo").val(),
-				"codigo" : $("#codigo").val()
-/* 				"usuarioIdCriacao" : $("#usuarioIdCriacao").val(),
+				"preco" : $("#preco").val(),
+				"descricao" : $("#descricao").val()
+/*				"codigo" : $("#codigo").val()
+ 				"usuarioIdCriacao" : $("#usuarioIdCriacao").val(),
 				"dataCriacao" : $("#dataCriacao").val(),
 				"usuarioIdTransacao" : $("#usuarioIdTransacao").val(),
 				"dataTransacao" : $("#dataTransacao").val(),
 				"excluido" : $("#excluido").val(),
-				"descricao" : $("#descricao").val(),
-				"preco" : $("#preco").val()
  */			});
 			var x = $.ajax({
 				type : 'POST',
@@ -123,6 +123,24 @@
 			});
 		});
 
+		  $("#btListarGerente").click(function() {
+				var x = $.ajax({
+				          type: "GET",
+				          url: baseURI + "/gerente",
+				          dataType: "JSON",
+				          success: function(data){
+				              console.log("OK");
+							  console.log(data);
+				              $("#retorno").text(x.responseText);
+				          },
+				          error: function(data){
+				              console.log("Erro");
+							  console.log(data);
+				              $("#retorno").html(x.responseText);
+				          }
+				      });
+				   });
+		
 	});
 </script>
 </head>
@@ -131,7 +149,8 @@
 		<input type="button" id="btSalvar" value="Salvar" /> <input
 			type="button" id="btRecuperar" value="Recuperar pelo id" /> <input
 			type="button" id="btExcluir" value="Excluir pelo id" /> <input
-			type="button" id="btListar" value="Listar" />
+			type="button" id="btListar" value="Listar" /> <input type="button"
+			id="btListarGerente" value="Listar para gerenciar" />
 	</p>
 	<label for="id">Id (nulo para inclusão)</label>
 	<br />
@@ -141,13 +160,21 @@
 	<br />
 	<input type="text" id="estabelecimentoId" />
 	<br />
-	<label for="codigo">Código</label>
-	<br />
-	<input type="text" id="codigo" />
-	<br />
 	<label for="titulo">Título</label>
 	<br />
 	<input type="text" id="titulo" />
+	<br />
+	<label for="preco">Preço</label>
+	<br />
+	<input type="text" id="preco" />
+	<br />
+	<label for="descricao">Descrição</label>
+	<br />
+	<input type="text" id="descricao" />
+	<!-- 
+	<label for="codigo">Código</label>
+	<br />
+	<input type="text" id="codigo" />
 	<br />
 	<label for="usuarioIdCriacao">usuarioIdCriacao</label>
 	<br />
@@ -169,14 +196,9 @@
 	<br />
 	<input type="text" id="excluido" />
 	<br />
-	<label for="preco">Preço</label>
 	<br />
-	<input type="text" id="preco" />
-	<br />
-	<label for="descricao">Descrição</label>
-	<br />
-	<input type="text" id="descricao" />
-	<br />
+	 -->
+
 	<p>Retorno:</p>
 	<p id="retorno" />
 </body>
