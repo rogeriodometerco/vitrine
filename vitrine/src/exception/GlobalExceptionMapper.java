@@ -5,7 +5,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 //Para mostra erro completo no browser.
-//@Provider
+@Provider
 public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
 
 	

@@ -1,0 +1,51 @@
+/sessao
+	POST
+		efetua o login
+	DELETE
+		efetua o logout
+	GET
+		recupera dados da sessão (usuário, estabelecimento, se usuário autenticado)
+
+/usuario
+	GET
+		lista todos os usuários
+	POST
+		cria ou altera um usuário
+
+	/{id}
+		GET
+			recupera o usuário correspondente ao id da URL
+		DELETE
+			exclui o usuário correspondente ao id da URL
+
+
+/estabelecimento
+	GET
+		lista todos os estabelecimentos
+	/{id}
+		GET
+			recupera o estabelecimento correspondente ao id da URL
+		POST
+			cria ou altera o estabelecimento
+		DELETE
+			exclui o estabelecimento correspondente ao id da URL
+	/usuario
+		GET
+			recupera o estabelecimento do usuário
+
+/item
+	GET
+		lista todos os itens
+	POST
+		cria ou altera um item.
+	/{id}
+		GET 
+			recupera o item correspondente ao id da URL
+		DELETE 
+			deleta o item correspondente ao id da URL
+
+	/estabelecimento
+		GET
+			lista todos os itens do estabelecimento do usuário logado (para gerenciar cadastro dos itens)
+
+

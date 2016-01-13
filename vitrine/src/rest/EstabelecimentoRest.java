@@ -17,25 +17,27 @@ import javax.ws.rs.core.Response;
 
 import modelo.Estabelecimento;
 import modelo.Usuario;
+import modelo.UsuarioEstabelecimento;
 
 import org.jboss.ejb3.annotation.SecurityDomain;
 
 import servico.EstabelecimentoFacade;
+import servico.UsuarioEstabelecimentoFacade;
 import util.Ejb;
 
 @SecurityDomain("vitrineRealm")
 @Stateless
-@RolesAllowed("ADMIN")
+//@RolesAllowed("ADMIN")
 @Path("/estabelecimento")
 public class EstabelecimentoRest {
 
-	private EstabelecimentoFacade facade;
+	private EstabelecimentoFacade estabelecimentoFacade;
+	private UsuarioEstabelecimentoFacade usuarioEstabelecimentoFacade;
 
-	private EstabelecimentoFacade getFacade() {
-		if (facade == null) {
-			facade = Ejb.lookup(EstabelecimentoFacade.class);
-		}
-		return facade;
+	public EstabelecimentoRest() {
+		estabelecimentoFacade = Ejb.lookup(EstabelecimentoFacade.class);
+		usuarioEstabelecimentoFacade = Ejb.lookup(UsuarioEstabelecimentoFacade.class);
+
 	}
 	
 	/* Cria um novo estabelecimento.
@@ -50,7 +52,7 @@ public class EstabelecimentoRest {
 		Usuario usuario = (Usuario)httpServletRequest.getSession().getAttribute("usuario");
 		return Response.ok()
 				.entity(
-						getFacade()
+						estabelecimentoFacade
 						.criar(usuario, estabelecimento))
 				.build();
 	}
@@ -65,7 +67,7 @@ public class EstabelecimentoRest {
 	public Response listar()  throws Exception {
 		return Response.ok()
 				.entity(
-						getFacade().listar())
+						estabelecimentoFacade.listar())
 				.build();
 	}
 	
@@ -80,25 +82,34 @@ public class EstabelecimentoRest {
 	public Response recuperar(@PathParam("id") Long id) throws Exception{
 		return Response.ok()
 				.entity(
-						getFacade().recuperar(id))
+						estabelecimentoFacade.recuperar(id))
+				.build();
+	}
+
+	@GET
+	@Path("/usuario")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recuperarEstabelecimentoDoUsuario(@Context HttpServletRequest httpServletRequest) 
+			throws Exception {
+		Estabelecimento estabelecimento = null;
+		Usuario usuario = (Usuario)httpServletRequest.getSession().getAttribute("usuario");
+		UsuarioEstabelecimento usuarioEstabelecimento = usuarioEstabelecimentoFacade
+				.recuperarEstabelecimento(usuario);
+		if (usuarioEstabelecimento != null) {
+			estabelecimento = usuarioEstabelecimento.getEstabelecimento();
+		}
+		return Response.ok()
+				.entity(estabelecimento)
 				.build();
 	}
 
 	@DELETE
 	@Path("/{id}")
 	public Response excluir(@PathParam("id") Long id) throws Exception {
-		getFacade().excluir(
-				getFacade().recuperar(id));
+		estabelecimentoFacade.excluir(
+				estabelecimentoFacade.recuperar(id));
 		return Response.ok()
 				.build();
 	}
-
-	/*
-	@OPTIONS 
-	public Response options()  throws Exception {
-		return Response.ok()
-				.build();
-	}
-	*/	
 
 }

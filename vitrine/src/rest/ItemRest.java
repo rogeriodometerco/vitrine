@@ -21,18 +21,41 @@ import modelo.Item;
 import servico.ItemFacade;
 import util.Ejb;
 
-@Path("/itens")
+@Path("/item")
 public class ItemRest {  
 	private Logger logger = Logger.getLogger(
 			getClass().getName());
 
-	private ItemFacade facade;
+	private ItemFacade itemFacade;
 
-	private ItemFacade getFacade() {
-		if (facade == null) {
-			facade = Ejb.lookup(ItemFacade.class);
+	public ItemRest() {
+		itemFacade = Ejb.lookup(ItemFacade.class);
+	}
+	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listarParaCliente()  throws Exception {
+		return Response.ok()
+				.entity(
+						itemFacade.listarParaCliente())
+				.build();
+	}
+	
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response recuperar(@PathParam("id") Long id) throws Exception{
+		Item item;
+		try {
+			item = itemFacade.recuperar(id);
+		} catch (Exception e) {
+			throw new WebApplicationException(e);
 		}
-		return facade;
+		return Response.ok()
+				.entity(
+						item)
+				.build();
 	}
 
 	@POST
@@ -49,7 +72,7 @@ public class ItemRest {
 				estabelecimento = (Estabelecimento)o;
 			}
 			item.setEstabelecimento(estabelecimento);
-			itemPersistido = getFacade().salvar(item);
+			itemPersistido = itemFacade.salvar(item);
 			logger.log(Level.INFO,"Item persistido: " + itemPersistido.toString());
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
@@ -60,34 +83,9 @@ public class ItemRest {
 				.build();
 	}
 
-	@GET
-	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response recuperar(@PathParam("id") Long id) throws Exception{
-		Item item;
-		try {
-			item = facade.recuperar(id);
-		} catch (Exception e) {
-			throw new WebApplicationException(e);
-		}
-		return Response.ok()
-				.entity(
-						item)
-				.build();
-	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarParaCliente()  throws Exception {
-		
-		return Response.ok()
-				.entity(
-						getFacade().listarParaCliente())
-				.build();
-	}
-	
-	@GET
-	@Path("/gerente")
+	@Path("/estabelecimento")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response listarParaGerenciar(@Context HttpServletRequest httpServletRequest) 
 			throws WebApplicationException {
@@ -100,7 +98,7 @@ public class ItemRest {
 			}
 			return Response.ok()
 					.entity(
-							getFacade().listarParaGerenciar(estabelecimento))
+							itemFacade.listarParaGerenciar(estabelecimento))
 					.build();
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
@@ -111,8 +109,8 @@ public class ItemRest {
 	@Path("/{id}")
 	public Response excluir(@PathParam("id") Long id) throws Exception {
 		
-		getFacade().excluir(
-				getFacade().recuperar(id));
+		itemFacade.excluir(
+				itemFacade.recuperar(id));
 		return Response.ok()
 				.build();
 	}

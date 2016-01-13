@@ -10,47 +10,7 @@ $(document).ready(function(){
 	//var baseURI = "http://localhost:8080/vitrine/rest/usuario"
 	//var baseURI = "http://ec2-54-207-116-50.sa-east-1.compute.amazonaws.com/vitrine/rest/usuario" 
 	var baseURI = "/vitrine/rest/estabelecimento" 
-			
-		  $("#btLogin").click(function() {
-			  var obj = JSON.stringify({
-					"email": $("#emailLogin").val(),
-					"senha": $("#senhaLogin").val()
-					});
-
-				var x = $.ajax({
-					type: 'POST',
-					contentType: 'application/json',
-					dataType: "JSON",
-					url: "/vitrine/rest/sessao",
-					data: obj,
-					success: function(data) {
-						console.log(data);
-		               $("#retorno").text(x.responseText);
-					},
-					error: function(data) {
-						console.log(data);
-			              $("#retorno").html(x.responseText);
-					}
-				});
-		   });
-
-	  $("#btLogout").click(function() {
-			var x= $.ajax({
-				type: 'DELETE',
-				url: "/vitrine/rest/sessao",
-	        	success: function(data) {
-					console.log(data);
-	               $("#retorno").text(x.responseText);
-				},
-				error: function(data) {
-					console.log(data);
-		               $("#retorno").text(x.responseText);
-				}
-			});
-	   });
-
-
-	  
+		  
 	$("#btSalvar").click(function() {
 		 var obj = JSON.stringify({
 			"nome": $("#nome").val(), 
@@ -133,6 +93,23 @@ $(document).ready(function(){
 		      });
 		   });
 		   
+  $("#btRecuperarDoUsuario").click(function() {
+		var x = $.ajax({
+		          type: "GET",
+		          url: baseURI + "/usuario",
+		          dataType: "JSON",
+		          success: function(data){
+		              console.log("OK");
+					  console.log(data);
+		              $("#retorno").text(x.responseText);
+		          },
+		          error: function(data){
+		              console.log("Erro");
+					  console.log(data);
+		              $("#retorno").html(x.responseText);
+		          }
+		      });
+		   });
 });
 
 
@@ -141,30 +118,22 @@ $(document).ready(function(){
 <body>
 	<h1>Estabelecimeto</h1>
 
-	<h2>Autentique-se</h2>
-	<label for="emailLogin">email</label>
-	<br />
-	<input type="text" id="emailLogin" value="rogeriodometerco@gmail.com" />
-	<br />
-	<label for="senhaLogin">Senha</label>
-	<br />
-	<input type="password" id="senhaLogin" value="123456" />
-	<br />
-	<input type="button" id="btLogin" value="Login" />
-	<input type="button" id="btLogout" value="Logout" />
-	<p>
-
-		<input type="button" id="btSalvar" value="Salvar" /> <input
-			type="button" id="btRecuperar" value="Recuperar pelo id" /> <input
-			type="button" id="btExcluir" value="Excluir pelo id" /> 
-			<input type="button" id="btListar" value="Listar" /> <br />
-			<label for="id">Id (nulo para inclusão)</label> <br /> <input type="text"
-			id="id" /> <br /> <label for="nome">Nome</label> <br /> <input
-			type="text" id="nome" /> <br /> <label for="email">email</label> <br />
-		<input type="text" id="email" /> <br /> <label for="endereco">Endereco</label>
-		<br /> <input type="text" id="endereco" /> <br /> <label
-			for="municipio">Municipio</label> <br /> <input type="text"
-			id="municipio" /> <br /> <label for="descricao">Descricao</label> <br />
+		<input type="button" id="btSalvar" value="Salvar" /> 
+		<input type="button" id="btRecuperar" value="Recuperar pelo id" /> 
+		<input type="button" id="btExcluir" value="Excluir pelo id" />
+		<input type="button" id="btListar" value="Listar" />
+		<input type="button" id="btRecuperarDoUsuario" value="Estabelecimento do usuário" /> <br />
+		<label for="id">Id (nulo para inclusão)</label> <br /> 
+		<input type="text" id="id" /> <br /> 
+		<label for="nome">Nome</label> <br /> 
+		<input type="text" id="nome" /> <br /> 
+		<label for="email">email</label> <br />
+		<input type="text" id="email" /> <br /> 
+		<label for="endereco">Endereco</label> <br /> 
+		<input type="text" id="endereco" /> <br /> 
+		<label for="municipio">Municipio</label> <br /> 
+		<input type="text" id="municipio" /> <br /> 
+		<label for="descricao">Descricao</label> <br />
 		<input type="text" id="descricao" />
 	<p>Retorno:</p>
 	<p id="retorno" />

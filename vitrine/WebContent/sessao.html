@@ -5,17 +5,13 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <script>
-
 $(document).ready(function(){
-
 	var baseURI = "/vitrine/rest/sessao" 
-
 	$("#btLogin").click(function() {
 		var obj = JSON.stringify({
 			"email": $("#emailLogin").val(),
 			"senha": $("#senhaLogin").val()
 		});
-
 		var x = $.ajax({
 			type: 'POST',
 			contentType: 'application/json',
@@ -32,7 +28,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-
 	$("#btLogout").click(function() {
 		var x= $.ajax({
 			type: 'DELETE',
@@ -47,10 +42,8 @@ $(document).ready(function(){
 			}
 		});
 	});
-
-
 	  
-	$("#btEstaLogado").click(function() {
+	$("#btInfo").click(function() {
 		var x = $.ajax({
 			type: "GET",
 			url: baseURI,
@@ -65,7 +58,6 @@ $(document).ready(function(){
 		});
 	});
 });
-
 	</script>
 </head>
 
@@ -81,7 +73,7 @@ $(document).ready(function(){
 	<br />
 	<input type="button" id="btLogin" value="Login" />
 	<input type="button" id="btLogout" value="Logout" />
-	<input type="button" id="btEstaLogado" value="Está logado?" />
+	<input type="button" id="btInfo" value="Info sessão" />
 	<p>
 	<p>Retorno:</p>
 	<p id="retorno" />
