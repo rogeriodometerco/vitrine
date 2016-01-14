@@ -17,7 +17,8 @@ $(document).ready(function(){
 			"email": $("#email").val(),
 			"endereco": $("#endereco").val(),
 			"municipio": $("#municipio").val(),
-			"descricao": $("#descricao").val()
+			"descricao": $("#descricao").val(),
+			"logo": $("#logo").val()
 			});
 		
 		var x = $.ajax({
@@ -50,6 +51,7 @@ $(document).ready(function(){
               $("#endereco").val(data.endereco);
               $("#muncipio").val(data.municipio);
               $("#descricao").val(data.descricao);              
+              $("#logo").val(data.logo);              
               $("#retorno").text(x.responseText);
           },
           error: function(data){
@@ -134,7 +136,9 @@ $(document).ready(function(){
 		<label for="municipio">Municipio</label> <br /> 
 		<input type="text" id="municipio" /> <br /> 
 		<label for="descricao">Descricao</label> <br />
-		<input type="text" id="descricao" />
+		<input type="text" id="descricao" /> <br />
+		<label for="logo">Logo</label> <br />
+		<input type="text" id="logo" />
 	<p>Retorno:</p>
 	<p id="retorno" />
 

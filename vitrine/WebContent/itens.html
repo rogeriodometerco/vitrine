@@ -17,14 +17,9 @@
 				},
 				"titulo" : $("#titulo").val(),
 				"preco" : $("#preco").val(),
-				"descricao" : $("#descricao").val()
-/*				"codigo" : $("#codigo").val()
- 				"usuarioIdCriacao" : $("#usuarioIdCriacao").val(),
-				"dataCriacao" : $("#dataCriacao").val(),
-				"usuarioIdTransacao" : $("#usuarioIdTransacao").val(),
-				"dataTransacao" : $("#dataTransacao").val(),
-				"excluido" : $("#excluido").val(),
- */			});
+				"descricao" : $("#descricao").val(),
+				"imagem" : $("#imagem").val()
+			});
 			var x = $.ajax({
 				type : 'POST',
 				contentType : 'application/json',
@@ -52,6 +47,7 @@
 					$("#titulo").val(data.titulo);
 					$("#preco").val(data.preco);
 					$("#descricao").val(data.descricao);
+					$("#imagem").val(data.imagem);
 					$("#retorno").text(x.responseText);
 				},
 				error : function(data) {
@@ -121,21 +117,25 @@
 			type="button" id="btListar" value="Listar" /> <input type="button"
 			id="btListarGerente" value="Listar para gerenciar" />
 	</p>
-	<label for="id">Id (nulo para inclus√£o)</label>
+	<label for="id">Id (nulo para inclus„o)</label>
 	<br />
 	<input type="text" id="id" />
 	<br />
-	<label for="titulo">T√≠tulo</label>
+	<label for="titulo">TÌtulo</label>
 	<br />
 	<input type="text" id="titulo" />
 	<br />
-	<label for="preco">Pre√ßo</label>
+	<label for="preco">PreÁo</label>
 	<br />
 	<input type="text" id="preco" />
 	<br />
-	<label for="descricao">Descri√ß√£o</label>
+	<label for="descricao">DescriÁ„o</label>
 	<br />
 	<input type="text" id="descricao" />
+	<br />
+	<label for="imagem">Imagem</label>
+	<br />
+	<input type="text" id="imagem" />
 
 
 	<p>Retorno:</p>

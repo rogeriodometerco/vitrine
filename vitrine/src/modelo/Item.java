@@ -1,7 +1,6 @@
 package modelo;
 
 import java.io.Serializable;
-
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 
@@ -37,6 +37,10 @@ public class Item implements Serializable {
 
 	@Column(name="preco")
 	private BigDecimal preco;
+
+	@Lob
+	@Column(name="imagem")
+	private String imagem;
 
 	public Long getId() {
 		return id;
@@ -84,6 +88,14 @@ public class Item implements Serializable {
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 }

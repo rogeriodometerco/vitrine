@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Estabelecimento  implements Serializable {
@@ -32,7 +33,9 @@ public class Estabelecimento  implements Serializable {
 	@Column(name="email")
 	private String email;
 
-	//TODO: logo
+	@Lob
+	@Column(name="logo")
+	private String logo;
 	
 	public Long getId() {
 		return id;
@@ -80,6 +83,14 @@ public class Estabelecimento  implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	
 }
