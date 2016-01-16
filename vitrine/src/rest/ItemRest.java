@@ -72,12 +72,13 @@ public class ItemRest {
 				estabelecimento = (Estabelecimento)o;
 			}
 			item.setEstabelecimento(estabelecimento);
+			logger.log(Level.INFO, "Imagens: " + item.getImagens().get(0).getImagem());
 			itemPersistido = itemFacade.salvar(item);
-			logger.log(Level.INFO,"Item persistido: " + itemPersistido.toString());
+			logger.log(Level.INFO, "Imagens Persistidas: " + itemPersistido.getImagens().get(0).getImagem());
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
 		}
-		logger.log(Level.INFO, "Pós persistir.");
+		logger.log(Level.INFO, "PÃ³s persistir");
 		return Response.ok()
 				.entity(itemPersistido)
 				.build();

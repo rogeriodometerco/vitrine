@@ -2,14 +2,20 @@ package modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 
 @Entity
@@ -41,6 +47,10 @@ public class Item implements Serializable {
 	@Lob
 	@Column(name="imagem")
 	private String imagem;
+	
+	@OneToMany(mappedBy="item", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JsonManagedReference 
+	private List<ImagemItem> imagens;
 
 	public Long getId() {
 		return id;
@@ -96,6 +106,14 @@ public class Item implements Serializable {
 
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
+	}
+
+	public List<ImagemItem> getImagens() {
+		return imagens;
+	}
+
+	public void setImagens(List<ImagemItem> imagens) {
+		this.imagens = imagens;
 	}
 
 }

@@ -18,7 +18,19 @@
 				"titulo" : $("#titulo").val(),
 				"preco" : $("#preco").val(),
 				"descricao" : $("#descricao").val(),
-				"imagem" : $("#imagem").val()
+				"imagem" : $("#imagem").val(),
+				"imagens": [
+							{
+								"id": $("#imagemId2").val(),
+								"item": {"id": $("#id").val()},
+								"imagem": $("#imagem2").val()
+							},
+							{
+								"id": $("#imagemId3").val(),
+								"item": {"id": $("#id").val()},
+								"imagem": $("#imagem3").val()
+							}
+					]
 			});
 			var x = $.ajax({
 				type : 'POST',
@@ -48,6 +60,10 @@
 					$("#preco").val(data.preco);
 					$("#descricao").val(data.descricao);
 					$("#imagem").val(data.imagem);
+					$("#imagemId2").val(data.imagens[0].id);
+					$("#imagem2").val(data.imagens[0].imagem);
+					$("#imagemId3").val(data.imagens[1].id);
+					$("#imagem3").val(data.imagens[1].imagem);
 					$("#retorno").text(x.responseText);
 				},
 				error : function(data) {
@@ -136,6 +152,14 @@
 	<label for="imagem">Imagem</label>
 	<br />
 	<input type="text" id="imagem" />
+	<br />
+	<label for="imagem2">id / Imagem 2</label>
+	<br />
+	<input type="text" id="imagemId2" /> / <input type="text" id="imagem2" />
+	<br />
+	<label for="imagem3">id / Imagem 3</label>
+	<br />
+	<input type="text" id="imagemId3" /> / <input type="text" id="imagem3" />
 
 
 	<p>Retorno:</p>
