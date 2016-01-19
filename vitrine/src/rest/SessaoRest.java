@@ -41,6 +41,10 @@ public class SessaoRest {
 		String email = params.get("email");
 		String senha = params.get("senha");
 		try {
+			if (httpServletRequest.getUserPrincipal() != null) {
+				//httpServletRequest.logout();
+				throw new Exception("Você já está logado, não é necessário autenticar-se novamente");
+	        }
 			HttpSession httpSession = httpServletRequest.getSession();
 			httpServletRequest.login(email, senha);
 			Usuario usuario = usuarioFacade.recuperarPeloEmail(email);
@@ -57,9 +61,7 @@ public class SessaoRest {
 			e.printStackTrace();
 			throw e;
 		}
-		return Response.ok()
-				.header("Cookies", "JSESSIONID=" + httpServletRequest.getSession().getId())
-				.build();
+		return Response.ok().build();
 	}
 
 	@DELETE
