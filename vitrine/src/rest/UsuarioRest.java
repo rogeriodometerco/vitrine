@@ -14,7 +14,7 @@ import modelo.Usuario;
 import servico.UsuarioFacade;
 import util.Ejb;
 
-@Path("/usuario")
+@Path("/usuarios")
 public class UsuarioRest  {
 
 	private UsuarioFacade facade;

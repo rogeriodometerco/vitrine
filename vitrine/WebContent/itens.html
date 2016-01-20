@@ -8,7 +8,7 @@
 	$(document).ready(function() {
 		//var baseURI = "http://localhost:8080/vitrine/rest/usuario"
 		//var baseURI = "http://ec2-54-207-116-50.sa-east-1.compute.amazonaws.com/vitrine/rest/usuario" 
-		var baseURI = "/vitrine/rest/item"
+		var baseURI = "/vitrine/rest/itens"
 		$("#btSalvar").click(function() {
 			var obj = JSON.stringify({
 				"id" : $("#id").val(),
@@ -104,10 +104,10 @@
 			});
 		});
 
-		  $("#btListarGerente").click(function() {
+		  $("#btListarEstabelecimento").click(function() {
 				var x = $.ajax({
 				          type: "GET",
-				          url: baseURI + "/estabelecimento",
+				          url: baseURI + "/estabelecimento/" + $("#estabelecimentoId").val(),
 				          dataType: "JSON",
 				          success: function(data){
 				              console.log("OK");
@@ -130,8 +130,9 @@
 		<input type="button" id="btSalvar" value="Salvar" /> <input
 			type="button" id="btRecuperar" value="Recuperar pelo id" /> <input
 			type="button" id="btExcluir" value="Excluir pelo id" /> <input
-			type="button" id="btListar" value="Listar" /> <input type="button"
-			id="btListarGerente" value="Listar para gerenciar" />
+			type="button" id="btListar" value="Listar" /> 
+			<input type="button" id="btListarEstabelecimento" value="Listar do estabelecimento:" />
+			<label>Id estab.:</label><input type="text" id="estabelecimentoId" />
 	</p>
 	<label for="id">Id (nulo para inclusão)</label>
 	<br />

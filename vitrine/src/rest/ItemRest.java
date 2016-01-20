@@ -1,6 +1,5 @@
 package rest;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,27 +17,30 @@ import javax.ws.rs.core.Response;
 
 import modelo.Estabelecimento;
 import modelo.Item;
+import servico.EstabelecimentoFacade;
 import servico.ItemFacade;
 import util.Ejb;
 
-@Path("/item")
+@Path("/itens")
 public class ItemRest {  
 	private Logger logger = Logger.getLogger(
 			getClass().getName());
 
 	private ItemFacade itemFacade;
+	private EstabelecimentoFacade estabelecimentoFacade;
 
 	public ItemRest() {
 		itemFacade = Ejb.lookup(ItemFacade.class);
+		estabelecimentoFacade = Ejb.lookup(EstabelecimentoFacade.class);
 	}
 	
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarParaCliente()  throws Exception {
+	public Response listar()  throws Exception {
 		return Response.ok()
 				.entity(
-						itemFacade.listarParaCliente())
+						itemFacade.listar())
 				.build();
 	}
 	
@@ -53,8 +55,7 @@ public class ItemRest {
 			throw new WebApplicationException(e);
 		}
 		return Response.ok()
-				.entity(
-						item)
+				.entity(item)
 				.build();
 	}
 
@@ -63,7 +64,6 @@ public class ItemRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response criar(@Context HttpServletRequest httpServletRequest, Item item) 
 			throws WebApplicationException {
-		logger.log(Level.INFO, item.toString());
 		Item itemPersistido;
 		try {
 			Object o = httpServletRequest.getSession().getAttribute("estabelecimento");
@@ -72,49 +72,41 @@ public class ItemRest {
 				estabelecimento = (Estabelecimento)o;
 			}
 			item.setEstabelecimento(estabelecimento);
-			logger.log(Level.INFO, "Imagens: " + item.getImagens().get(0).getImagem());
 			itemPersistido = itemFacade.salvar(item);
-			logger.log(Level.INFO, "Imagens Persistidas: " + itemPersistido.getImagens().get(0).getImagem());
 		} catch (Exception e) {
 			throw new WebApplicationException(e);
 		}
-		logger.log(Level.INFO, "Pós persistir");
 		return Response.ok()
 				.entity(itemPersistido)
 				.build();
 	}
 
 
-	@GET
-	@Path("/estabelecimento")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response listarParaGerenciar(@Context HttpServletRequest httpServletRequest) 
-			throws WebApplicationException {
-		
-		try {
-			Object o = httpServletRequest.getSession().getAttribute("estabelecimento");
-			Estabelecimento estabelecimento = null;
-			if (o != null) {
-				estabelecimento = (Estabelecimento)o;
-			}
-			return Response.ok()
-					.entity(
-							itemFacade.listarParaGerenciar(estabelecimento))
-					.build();
-		} catch (Exception e) {
-			throw new WebApplicationException(e);
-		}
-	}
-	
 	@DELETE
 	@Path("/{id}")
 	public Response excluir(@PathParam("id") Long id) throws Exception {
-		
 		itemFacade.excluir(
 				itemFacade.recuperar(id));
 		return Response.ok()
 				.build();
 	}
 
+	
+	@GET
+	@Path("/estabelecimento/{estabelecimentoId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response listarParaGerenciar(@PathParam("estabelecimentoId") Long estabelecimentoId) 
+			throws WebApplicationException {
+		
+		try {
+			Estabelecimento estabelecimento = estabelecimentoFacade.recuperar(estabelecimentoId);
+			return Response.ok()
+					.entity(
+							itemFacade.listarPorEstabelecimento(estabelecimento))
+					.build();
+		} catch (Exception e) {
+			throw new WebApplicationException(e);
+		}
+	}
 	
 }

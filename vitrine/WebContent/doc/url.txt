@@ -6,7 +6,7 @@
 	GET
 		recupera dados da sessão (usuário, estabelecimento, se usuário autenticado)
 
-/usuario
+/usuarios
 	GET
 		lista todos os usuários
 	POST
@@ -19,7 +19,7 @@
 			exclui o usuário correspondente ao id da URL
 
 
-/estabelecimento
+/estabelecimentos
 	GET
 		lista todos os estabelecimentos
 	/{id}
@@ -33,7 +33,7 @@
 		GET
 			recupera o estabelecimento do usuário
 
-/item
+/itens
 	GET
 		lista todos os itens
 	POST
@@ -44,8 +44,8 @@
 		DELETE 
 			deleta o item correspondente ao id da URL
 
-	/estabelecimento
+	/estabelecimento/{id}
 		GET
-			lista todos os itens do estabelecimento do usuário logado (para gerenciar cadastro dos itens)
+			lista todos os itens do estabelecimento {id}
 
 

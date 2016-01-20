@@ -54,7 +54,7 @@ public class SessaoRest {
 			if (usuarioEstabelecimento != null) {
 				estabelecimento = usuarioEstabelecimento.getEstabelecimento();
 			}
-			// TODO Avaliar colocação do usuário na sessão, má prática. Veja #infoSessao.
+			// TODO Colocar o usuário inteiro na sessão é má prática, avaliar. Veja #infoSessao.
 			httpSession.setAttribute("usuario", usuario);
 			httpSession.setAttribute("estabelecimento", estabelecimento);
 		} catch (ServletException e) {
